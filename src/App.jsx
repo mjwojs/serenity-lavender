@@ -7,7 +7,7 @@ import img3 from "./assets/IMG_5798.jpg";
 import img4 from "./assets/IMG_6805.jpg";
 import img5 from "./assets/IMG_6947.jpg";
 import img6 from "./assets/IMG_6992.jpg";
-import logo from "./assets/logo.png";
+import logo from "./assets/logo_clear.png";
 
 const images = [img1, img2, img3, img4, img5, img6];
 
@@ -33,7 +33,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col font-sans bg-gray-50 text-gray-900">
       {/* HEADER */}
       <header className="flex items-center justify-between p-4 border-b border-gray-300">
-        <img src={logo} alt="Serenity Lavender Farm Logo" className="h-12" />
+        <img src={logo} alt="Serenity Lavender Farm Logo" className="h-12 w-auto" />
         <h1 className="text-2xl font-serif font-bold">Serenity Lavender Farm</h1>
       </header>
 
@@ -100,7 +100,7 @@ export default function App() {
               key={i}
               src={src}
               alt={`Lavender ${i + 1}`}
-              className="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform"
+              className="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform max-h-48 object-cover w-full"
               onClick={() => setGalleryIndex(i)}
             />
           ))}
