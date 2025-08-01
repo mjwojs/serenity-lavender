@@ -33,7 +33,7 @@ export default function App() {
       {/* HERO SECTION */}
       <section
         className="h-screen w-full flex items-center justify-center relative bg-cover bg-center"
-        style={{ backgroundImage: `url(${img3})` }}
+        style={{ backgroundImage: `url(${img1})` }}
       >
         <div className="absolute inset-0 bg-white/30 backdrop-blur-sm" />
         <motion.div
@@ -53,7 +53,7 @@ export default function App() {
         {/* IMAGE */}
         <div>
           <img
-            src={img1}
+            src={img6}
             alt="Lavender Field"
             className="w-full rounded-xl shadow-xl"
           />
@@ -91,13 +91,14 @@ export default function App() {
       {/* LIGHTBOX MODAL */}
       {lightboxImage && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 transition-opacity duration-300"
           onClick={() => setLightboxImage(null)}
         >
           <img
             src={lightboxImage}
-            alt="Full"
-            className="max-h-[90vh] max-w-[90vw] rounded-lg shadow-lg"
+            alt="Full size"
+            className="max-w-[100vw] max-h-[100vh] object-contain"
+            onClick={(e) => e.stopPropagation()}
           />
         </div>
       )}
