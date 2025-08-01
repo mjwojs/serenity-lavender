@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 
-import img1 from "./assets/IMG_1271.jpg";
-import img2 from "./assets/IMG_1333.jpg";
+import img1 from "./assets/IMG_1333.jpg";
+import img2 from "./assets/IMG_1271.jpg";
 import img3 from "./assets/IMG_5798.jpg";
 import img4 from "./assets/IMG_6805.jpg";
 import img5 from "./assets/IMG_6947.jpg";
 import img6 from "./assets/IMG_6992.jpg";
 import logo from "./assets/logo_text_clear.png";
+import Navbar from "./Navbar";
 
 const images = [img1, img2, img3, img4, img5, img6];
 
@@ -27,39 +28,7 @@ export default function App() {
   return (
     <div className="min-h-screen font-sans bg-gray-50 text-gray-900 overflow-x-hidden">
       {/* NAVBAR */}
-      <header className="w-full sticky top-0 left-0 z-50 bg-white shadow-md backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-8 py-4">
-          <img
-            src={logo}
-            alt="Logo"
-            className="h-12 max-w-[150px] w-auto object-contain"
-          />
-
-          <nav className="flex space-x-8 text-gray-800 font-medium text-base">
-            <a href="#about" className="hover:text-purple-600 transition underline-offset-4 hover:underline">
-              About
-            </a>
-            <a href="#experience" className="hover:text-purple-600 transition underline-offset-4 hover:underline">
-              Experience
-            </a>
-            <a href="#photos" className="hover:text-purple-600 transition underline-offset-4 hover:underline">
-              Photos
-            </a>
-            <a href="#prices" className="hover:text-purple-600 transition underline-offset-4 hover:underline">
-              Prices
-            </a>
-            <a href="#contact" className="hover:text-purple-600 transition underline-offset-4 hover:underline">
-              Contact
-            </a>
-          </nav>
-
-          <div className="ml-auto text-gray-600 font-semibold text-sm md:text-base select-none">
-            📞 +48 123 456 789
-          </div>
-        </div>
-      </header>
-
-
+      <Navbar />
 
       {/* HERO SECTION */}
       <section
@@ -93,7 +62,7 @@ export default function App() {
         {/* TEXT */}
         <div className="bg-white p-6 shadow-xl rounded-xl border border-purple-200">
           <h2 className="text-2xl font-semibold mb-4">
-            My Story – The Beginning of Serenity Lavender Farm
+            My Story - The Beginning of Serenity Lavender Farm
           </h2>
           <div className="text-gray-700 text-justify space-y-4 leading-relaxed">
             {storyText.split("\n\n").map((para, i) => (
