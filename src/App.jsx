@@ -11,7 +11,6 @@ import logo from "./assets/logo_clear.png";
 
 const images = [img1, img2, img3, img4, img5, img6];
 
-
 const storyText = `
 After living in a big city for 28 years, I felt a growing desire for a quieter, more meaningful life. A trip with my daughter to Beaver Island became a turning point. There, we learned the story of Protar—a man who once sought peace and serenity in nature. His legacy touched me deeply.
 
@@ -23,93 +22,92 @@ She taught me what truly matters in life. And now, as I walk among the lavender 
 `;
 
 export default function App() {
-  const [galleryIndex, setGalleryIndex] = useState(0);
-
-  const nextImage = () => setGalleryIndex((i) => (i + 1) % images.length);
-  const prevImage = () =>
-    setGalleryIndex((i) => (i - 1 + images.length) % images.length);
+  const [lightboxImage, setLightboxImage] = useState(null);
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-gray-50 text-gray-900">
-      {/* HEADER */}
-      <header className="flex items-center justify-between p-4 border-b border-gray-300">
-        <img src={logo} alt="Serenity Lavender Farm Logo" className="h-12 w-auto" />
-        <h1 className="text-2xl font-serif font-bold">Serenity Lavender Farm</h1>
-      </header>
+    <div className="min-h-screen font-sans bg-gray-50 text-gray-900 overflow-x-hidden">
+      {/* HERO HEADER */}
+      <section className="relative h-screen flex flex-col justify-center items-center bg-gradient-to-b from-purple-100 to-white">
+        <div className="absolute top-10 left-10">
+          <motion.img
+            initial={{ x: -100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
+            src={logo}
+            alt="Logo"
+            className="h-20 md:h-24"
+          />
+        </div>
+        <motion.h1
+          initial={{ x: 100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1.2 }}
+          className="text-5xl md:text-6xl font-serif font-bold text-center"
+        >
+          Serenity Lavender Farm
+        </motion.h1>
+      </section>
 
-      {/* HERO */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
-        className="relative h-[70vh] bg-cover bg-center"
-        style={{ backgroundImage: `url(${images[galleryIndex]})` }}
+      {/* INTRO IMAGE */}
+      <section
+        className="relative h-[60vh] bg-cover bg-center"
+        style={{ backgroundImage: `url(${img3})` }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center px-4 text-center">
-          <motion.h2
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="text-white text-5xl md:text-6xl font-serif drop-shadow-lg"
-          >
-            Serenity Lavender Farm
-          </motion.h2>
-          <motion.p
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1 }}
-            className="text-white mt-4 max-w-xl text-lg md:text-xl drop-shadow"
-          >
-            A place of peace, beauty, and dreams.
-          </motion.p>
+        <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-2xl md:text-3xl font-light">
+          <p>A place of peace, beauty, and dreams.</p>
+        </div>
+      </section>
 
-          {/* Controls to scroll images */}
-          <div className="mt-8 flex gap-4">
-            <button
-              onClick={prevImage}
-              className="bg-white bg-opacity-60 hover:bg-opacity-90 rounded-full px-4 py-2 font-semibold text-gray-900 transition"
-            >
-              Previous
-            </button>
-            <button
-              onClick={nextImage}
-              className="bg-white bg-opacity-60 hover:bg-opacity-90 rounded-full px-4 py-2 font-semibold text-gray-900 transition"
-            >
-              Next
-            </button>
+      {/* GALLERY + STORY */}
+      <section className="max-w-7xl mx-auto p-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+        {/* STORY */}
+        <div className="bg-white p-6 shadow-xl rounded-xl border border-purple-200">
+          <h2 className="text-2xl font-semibold mb-4">
+            My Story – The Beginning of Serenity Lavender Farm
+          </h2>
+          <div className="text-gray-700 text-justify space-y-4 leading-relaxed">
+            {storyText
+              .split("\n\n")
+              .map((para, i) => <p key={i}>{para}</p>)}
           </div>
         </div>
-      </motion.section>
 
-      {/* STORY */}
-      <section className="max-w-4xl mx-auto p-8 prose prose-indigo">
-        <h2>My Story – The Beginning of Serenity Lavender Farm</h2>
-        {storyText.split("\n\n").map((paragraph, i) => (
-          <p key={i}>{paragraph}</p>
-        ))}
-      </section>
-
-      {/* GALLERY */}
-      <section className="max-w-6xl mx-auto p-8">
-        <h2 className="text-3xl font-serif mb-6 text-center">
-          Lavender Gallery
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {images.map((src, i) => (
-            <img
-              key={i}
-              src={src}
-              alt={`Lavender ${i + 1}`}
-              className="rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform max-h-48 object-cover w-full"
-              onClick={() => setGalleryIndex(i)}
-            />
-          ))}
+        {/* GALLERY */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-4 text-center">
+            Lavender Gallery
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            {images.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={`Lavender ${i + 1}`}
+                className="w-full h-40 object-cover rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform"
+                onClick={() => setLightboxImage(src)}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
+      {/* LIGHTBOX MODAL */}
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          onClick={() => setLightboxImage(null)}
+        >
+          <img
+            src={lightboxImage}
+            alt="Full"
+            className="max-h-[90vh] max-w-[90vw] rounded-lg shadow-lg"
+          />
+        </div>
+      )}
+
       {/* FOOTER */}
-      <footer className="p-4 text-center text-gray-600 border-t border-gray-300">
-        © {new Date().getFullYear()} Serenity Lavender Farm. All rights reserved.
+      <footer className="mt-12 p-4 text-center text-gray-600 border-t">
+        © {new Date().getFullYear()} Serenity Lavender Farm
       </footer>
     </div>
   );
