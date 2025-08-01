@@ -7,7 +7,7 @@ import img3 from "./assets/IMG_5798.jpg";
 import img4 from "./assets/IMG_6805.jpg";
 import img5 from "./assets/IMG_6947.jpg";
 import img6 from "./assets/IMG_6992.jpg";
-import logo from "./assets/logo_clear.png";
+import logo from "./assets/logo_text_clear.png";
 
 const images = [img1, img2, img3, img4, img5, img6];
 
@@ -26,68 +26,96 @@ export default function App() {
 
   return (
     <div className="min-h-screen font-sans bg-gray-50 text-gray-900 overflow-x-hidden">
-      {/* HERO HEADER */}
-      <section className="relative h-screen flex flex-col justify-center items-center bg-gradient-to-b from-purple-100 to-white">
-        <div className="absolute top-10 left-10">
-          <motion.img
-            initial={{ x: -100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
+      {/* NAVBAR */}
+      <header className="w-full sticky top-0 left-0 z-50 bg-white shadow-md backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-8 py-4">
+          <img
             src={logo}
             alt="Logo"
-            className="h-20 md:h-24"
+            className="h-12 max-w-[150px] w-auto object-contain"
           />
-        </div>
-        <motion.h1
-          initial={{ x: 100, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1.2 }}
-          className="text-5xl md:text-6xl font-serif font-bold text-center"
-        >
-          Serenity Lavender Farm
-        </motion.h1>
-      </section>
 
-      {/* INTRO IMAGE */}
+          <nav className="flex space-x-8 text-gray-800 font-medium text-base">
+            <a href="#about" className="hover:text-purple-600 transition underline-offset-4 hover:underline">
+              About
+            </a>
+            <a href="#experience" className="hover:text-purple-600 transition underline-offset-4 hover:underline">
+              Experience
+            </a>
+            <a href="#photos" className="hover:text-purple-600 transition underline-offset-4 hover:underline">
+              Photos
+            </a>
+            <a href="#prices" className="hover:text-purple-600 transition underline-offset-4 hover:underline">
+              Prices
+            </a>
+            <a href="#contact" className="hover:text-purple-600 transition underline-offset-4 hover:underline">
+              Contact
+            </a>
+          </nav>
+
+          <div className="ml-auto text-gray-600 font-semibold text-sm md:text-base select-none">
+            📞 +48 123 456 789
+          </div>
+        </div>
+      </header>
+
+
+
+      {/* HERO SECTION */}
       <section
-        className="relative h-[60vh] bg-cover bg-center"
+        className="h-screen w-full flex items-center justify-center relative bg-cover bg-center"
         style={{ backgroundImage: `url(${img3})` }}
       >
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-white text-2xl md:text-3xl font-light">
-          <p>A place of peace, beauty, and dreams.</p>
-        </div>
+        <div className="absolute inset-0 bg-white/30 backdrop-blur-sm" />
+        <motion.div
+          initial={{ x: 200, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="relative z-10 text-center px-4"
+        >
+          <h2 className="text-4xl md:text-5xl text-gray-800 font-light drop-shadow-md">
+            A place of peace, beauty, and dreams.
+          </h2>
+        </motion.div>
       </section>
 
-      {/* GALLERY + STORY */}
-      <section className="max-w-7xl mx-auto p-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-        {/* STORY */}
+      {/* ABOUT & STORY SECTION */}
+      <section id="about" className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-2 gap-12 items-center">
+        {/* IMAGE */}
+        <div>
+          <img
+            src={img1}
+            alt="Lavender Field"
+            className="w-full rounded-xl shadow-xl"
+          />
+        </div>
+
+        {/* TEXT */}
         <div className="bg-white p-6 shadow-xl rounded-xl border border-purple-200">
           <h2 className="text-2xl font-semibold mb-4">
             My Story – The Beginning of Serenity Lavender Farm
           </h2>
           <div className="text-gray-700 text-justify space-y-4 leading-relaxed">
-            {storyText
-              .split("\n\n")
-              .map((para, i) => <p key={i}>{para}</p>)}
-          </div>
-        </div>
-
-        {/* GALLERY */}
-        <div>
-          <h2 className="text-2xl font-semibold mb-4 text-center">
-            Lavender Gallery
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {images.map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={`Lavender ${i + 1}`}
-                className="w-full h-40 object-cover rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform"
-                onClick={() => setLightboxImage(src)}
-              />
+            {storyText.split("\n\n").map((para, i) => (
+              <p key={i}>{para}</p>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* GALLERY SECTION */}
+      <section id="photos" className="max-w-7xl mx-auto px-6 py-12">
+        <h2 className="text-3xl font-semibold mb-8 text-center">Lavender Gallery</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {images.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt={`Lavender ${i + 1}`}
+              className="w-full h-40 object-cover rounded-lg shadow-md cursor-pointer hover:scale-105 transition-transform"
+              onClick={() => setLightboxImage(src)}
+            />
+          ))}
         </div>
       </section>
 
@@ -106,8 +134,8 @@ export default function App() {
       )}
 
       {/* FOOTER */}
-      <footer className="mt-12 p-4 text-center text-gray-600 border-t">
-        © {new Date().getFullYear()} Serenity Lavender Farm
+      <footer className="mt-12 p-6 text-center text-gray-600 border-t text-sm">
+        © {new Date().getFullYear()} Serenity Lavender Farm — All rights reserved.
       </footer>
     </div>
   );
